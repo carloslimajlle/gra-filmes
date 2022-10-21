@@ -1,0 +1,59 @@
+config:
+  message: Aplicação iniciada
+
+server:
+  port: 8000
+  servlet:
+    context-path: /
+  undertow:
+    accesslog:
+      prefix: "[GRA-FILMES]"
+
+  tomcat:
+    relaxed-query-chars: "[,]"
+    relaxed-path-chars: "[,]"
+
+spring:
+  main:
+    banner-mode: 'off'
+  output:
+    ansi:
+      enabled: 'always'
+  application:
+    name: 'gra-filmes'
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: false
+        format_sql: true
+        use_sql_comments: true
+
+  jmx:
+    enabled: false
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:texoit
+    username: sa
+    password: password
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{1}: %msg%n'
+  level:
+    root: INFO
+    com.texoit: DEBUG
+
+info:
+  app:
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      version: '@java.version@'
