@@ -30,6 +30,7 @@ Inicie o servidor
   mvn spring-boot:run
 ```
 
+Obs: Necessário ter o Java JDK 11 e maven
 
 ## Documentação da API
 
