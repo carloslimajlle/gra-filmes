@@ -25,7 +25,7 @@ public class GraFilmesApplication {
 
     @Bean
     CommandLineRunner init() {
-        moviesService.loadCsvMovies();
+        moviesService.loadCsvMovies("src/main/resources/movielist.csv");
         return args -> log.info(message);
     }
 }
