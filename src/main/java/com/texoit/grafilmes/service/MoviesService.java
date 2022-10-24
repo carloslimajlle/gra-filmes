@@ -148,20 +148,24 @@ public class MoviesService {
             producersWinnerDTO.getProducer()) && v.getPreviousWin()== producersWinnerDTO.getPreviousWin() && v.getFollowingWin()== producersWinnerDTO.getFollowingWin());
     }
 
-    private double averageWinner(final List<ProducersWinnerDTO> producersWinnerDTOList) {
-        return producersWinnerDTOList.stream().mapToDouble(ProducersWinnerDTO::getInterval).average().orElse(0.0);
-    }
-
     private Map<String,List<ProducersWinnerDTO>> getIntervalAwards(final List<ProducersWinnerDTO> producersWinnerDTOList) {
-        final double averageWinner = averageWinner(producersWinnerDTOList);
+        final int min = producersWinnerDTOList.stream()
+            .mapToInt(ProducersWinnerDTO::getInterval)
+            .min()
+            .orElse(0);
+
+        final int max = producersWinnerDTOList.stream()
+            .mapToInt(ProducersWinnerDTO::getInterval)
+            .max()
+            .orElse(0);
 
         final List<ProducersWinnerDTO> minWinner = producersWinnerDTOList.stream()
-            .filter(v -> v.getInterval() <= averageWinner)
+            .filter(v -> v.getInterval() == min)
             .collect(
                 Collectors.toList());
 
         final List<ProducersWinnerDTO> maxWinner = producersWinnerDTOList.stream()
-            .filter(v -> v.getInterval() > averageWinner)
+            .filter(v -> v.getInterval() == max)
             .collect(
                 Collectors.toList());
 

@@ -60,20 +60,6 @@ public class MoviesServiceTest {
     }
 
     @Test
-    public void moreSameWinnerTest() throws Exception {
-        cleanTables.clean("movies");
-        moviesService.loadCsvMovies("src/test/resources/movielist-same-winner.csv");
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/movies/producers/interval-winner")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$").isNotEmpty())
-            .andExpect(jsonPath("$.min.[0].producer", is("Bo Derek")))
-            .andExpect(jsonPath("$.min.[1].producer", is("Bo Derek")));
-
-    }
-
-    @Test
     public void noWinnerTest() throws Exception {
         cleanTables.clean("movies");
         moviesService.loadCsvMovies("src/test/resources/movielist-no-winner.csv");
